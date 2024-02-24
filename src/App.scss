@@ -1,0 +1,12 @@
+@import './styles/home';
+@import './styles/editor';
+
+.App{
+  padding: 2rem;
+  background-color: #0f0a19;
+  min-height: 100vh;
+}
+
+body{
+  // max-height: 100vh;
+}
