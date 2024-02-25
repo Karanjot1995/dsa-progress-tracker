@@ -40,6 +40,9 @@ export const getAllQuestions = async () => {
   return await fetch(`${API_URL}/api/all`).then((res) => res.json());
 };
 
+export const getTags = async () => {
+  return await fetch(`${API_URL}/api/tags`).then((res) => res.json());
+};
 
 export const getQuestion = async (id) => {
   return await fetch(`${API_URL}/api/question/${id}`).then((res) => res.json());
@@ -48,6 +51,13 @@ export const getQuestion = async (id) => {
 
 export const createQuestion = async (data) => {
   return await fetch(`${API_URL}/api/create`, {
+    ...postOptions,
+    body: JSON.stringify(data)
+  }).then(res => res.json())
+}
+
+export const updateSolved = async (data) => {
+  return await fetch(`${API_URL}/api/update-solved`, {
     ...postOptions,
     body: JSON.stringify(data)
   }).then(res => res.json())

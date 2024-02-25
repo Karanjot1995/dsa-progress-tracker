@@ -6,12 +6,12 @@ const Question = ({ addTitle, addDescription, selectedTags, addTags, title , des
   // const [description, setDescription] = useState(description)
   // const [selTags, setSelTags] = useState(selectedTags)
 
-  const selectTags =(id) => {
-    if(selectedTags.indexOf(id)==-1){
-      addTags([...selectedTags,id])
+  const selectTags =(_id) => {
+    if(selectedTags.indexOf(_id)==-1){
+      addTags([...selectedTags,_id])
       // setSelTags([...selTags,id])
     }else{
-      addTags(t => t.filter(tag_id => tag_id !== id))
+      addTags(t => t.filter(tag_id => tag_id !== _id))
       // setSelTags(t => t.filter(tag_id => tag_id !== id));
     }
   }
@@ -44,7 +44,7 @@ const Question = ({ addTitle, addDescription, selectedTags, addTags, title , des
           <label className="me-2">Tags: </label> 
           <ul className="ps-0 m-0">
             {tags.map(tag=>
-              <li className={selectedTags && selectedTags.indexOf(tag.id)>-1?"tag-tile selected":"tag-tile"} key={tag.id} onClick={()=>selectTags(tag.id)}>{tag.title}</li>
+              <li className={selectedTags && selectedTags.indexOf(tag._id)>-1?"tag-tile selected":"tag-tile"} key={tag._id} onClick={()=>selectTags(tag._id)}>{tag.title}</li>
             )}
           </ul>
           

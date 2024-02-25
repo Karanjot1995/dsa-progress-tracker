@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProgressBar from '../Common/ProgressBar';
 import { useNavigate } from "react-router-dom";
+import { updateSolved } from '../../services/services';
 
 const AccordionItem = ({ title, questions }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +19,22 @@ const AccordionItem = ({ title, questions }) => {
     setIsOpen(!isOpen);
   };
 
+  const checkSolved = (e,id) => {
+    let is_solved = e.target.checked
+    let data = {id,is_solved}
+    updateSolved(data)
+    if(is_solved){
+      setSolved(solved+1)
+    }else{
+      setSolved(solved-1)
+    }
+  };
+  
 
   return (
     <div className={`accordion-item ${isOpen ? 'open' : ''}`}>
       <div className="accordion-title" onClick={toggleAccordion}>
-        <div className='d-flex justify-content-between'>
+        <div className='d-md-flex justify-content-between'>
           {title}
           <div className="d-flex align-items-center pg-container">
             <p className='mb-0 pg-text'>({solved}/{questions.length})</p>
@@ -41,7 +53,7 @@ const AccordionItem = ({ title, questions }) => {
             </tr>
             {questions.map(q=>
               <tr>
-                <td><input defaultChecked={q.solved} type="checkbox" /></td>
+                <td><input defaultChecked={q.solved} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
                 <td>{q.difficulty}</td>
