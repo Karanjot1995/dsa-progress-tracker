@@ -1,4 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import CodeEditor from "../components/CodeEditor";
 import DropdownButton from "../components/DropdownButton";
 import Accordion from '../components/Home/Accordion';
@@ -30,8 +32,35 @@ const items = [
 ];
 
 function Home () {
+    const navigate = useNavigate();
+    const [totalQuestions, setTotalQuestions] = useState(0);
+    const [solvedQuestions, setSolvedQuestions] = useState(0);
+
+    useEffect(() => {
+      let count = 0
+      let solved = 0
+      items.map(category=>{
+        count+=category.questions.length
+        if(category.questions){
+          category.questions.map(q=>q.solved? solved+=1:'')
+        }
+      })
+      setTotalQuestions(count)
+      setSolvedQuestions(solved)
+    },[])
+
+    function openEditor() {
+      navigate("/editor");
+    }
+
     return (
       <div className="home">
+        <div className="new-problem mb-2 d-flex justify-content-between align-items-center">
+          <div className="text-light">Progress: {solvedQuestions}/{totalQuestions} solved</div>
+          <div className="">
+            <button onClick={openEditor} className="btn btn-danger">New Problem</button>
+          </div>   
+        </div>
         <div>
           <Accordion items={items} />
         </div>

@@ -1,0 +1,25 @@
+// ProgressBar.scss
+.progress-bar {
+  background-color: #c6c3c3!important;
+  height: 10px;
+  width:350px;
+
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  &__text {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+  }
+
+  &__inner {
+    height: 100%;
+    background-color: #59db59;
+    transition: width 0.3s ease-in-out;
+  }
+}
+

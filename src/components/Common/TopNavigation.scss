@@ -1,0 +1,29 @@
+// TopNavigation.scss
+.top-navigation {
+  height: 50px;
+  background-color: #333;
+  ul {
+    height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    li {
+      margin: 0 10px;
+      a {
+        height: 45px;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        position: relative;
+        border-radius: 10px;
+        transition: background-color 0.2s ease-in-out;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+}

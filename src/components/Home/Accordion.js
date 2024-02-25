@@ -1,6 +1,6 @@
 // Accordion.js
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import AccordionItem from './AccordionItem';
 
 const Accordion = ({ items }) => {
@@ -11,15 +11,6 @@ const Accordion = ({ items }) => {
       ))}
     </div>
   );
-};
-
-Accordion.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      content: PropTypes.node.isRequired,
-    })
-  ).isRequired,
 };
 
 export default Accordion;

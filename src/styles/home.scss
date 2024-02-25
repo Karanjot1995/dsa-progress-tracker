@@ -1,9 +1,9 @@
 .home{
-
+  width:80%;
+  margin: auto;
 }
 
 .accordion {
-  width: 80%;
   margin: auto;
   .accordion-item {
     border-bottom: 1px solid #ccc;
@@ -12,6 +12,9 @@
       .accordion-title {
         background-color:#7ea0eb;
       }
+    }
+    .pg-text{
+      margin-right: 10px;
     }
 
     .accordion-title {
