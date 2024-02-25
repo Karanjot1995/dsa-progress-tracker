@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProgressBar from '../Common/ProgressBar';
+import { useNavigate } from "react-router-dom";
 
 const AccordionItem = ({ title, questions }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [solved, setSolved] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let cnt = 0
@@ -40,7 +42,8 @@ const AccordionItem = ({ title, questions }) => {
             {questions.map(q=>
               <tr>
                 <td><input defaultChecked={q.solved} type="checkbox" /></td>
-                <td>{q.title}</td>
+                <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
+                {/* <td>{q.title}</td> */}
                 <td>{q.difficulty}</td>
               </tr>
             )}

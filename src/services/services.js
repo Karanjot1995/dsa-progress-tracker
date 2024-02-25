@@ -41,6 +41,11 @@ export const getAllQuestions = async () => {
 };
 
 
+export const getQuestion = async (id) => {
+  return await fetch(`${API_URL}/api/question/${id}`).then((res) => res.json());
+};
+
+
 export const createQuestion = async (data) => {
   return await fetch(`${API_URL}/api/create`, {
     ...postOptions,

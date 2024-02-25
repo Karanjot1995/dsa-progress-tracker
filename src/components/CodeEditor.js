@@ -1,12 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import { CODE_SNIPPETS } from "../constants";
 import Output from "./Output";
 import DropdownButton from "./DropdownButton";
 import Question from "./Question";
-import { createQuestion } from "../services/services";
+import { createQuestion, getQuestion } from "../services/services";
+import { ToastContainer, toast } from 'react-toastify';
 
+const allTags = [
+  {id:1, title:'Array'},
+  {id:2, title:'Linked List'},
+  {id:3, title:'Graph'},
+  {id:4, title:'Tree'},
+]
 const CodeEditor = () => {
   const editorRef = useRef();
   const [value, setValue] = useState("");
@@ -14,6 +21,22 @@ const CodeEditor = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
+  const queryParameters = new URLSearchParams(window.location.search)
+  const edit_id = queryParameters.get("id")
+
+  useEffect(() => {
+    if(edit_id){
+      getQuestion(edit_id).then(res=>{
+        if(res){
+          setTitle(res.title)
+          setDescription(res.description)
+          setValue(res.code)
+          setLanguage(res.language)
+          setTags(res.tags)
+        }
+      })
+    }
+  },[])
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -37,7 +60,12 @@ const CodeEditor = () => {
 
   const saveQuestion = () => {
     let data = {code: value,version:'', language, title, description, tags}
+    if(edit_id){
+      data['id'] = edit_id
+    }
+    // console.log(data)
     createQuestion(data).then(res=>console.log(res))
+
   }
 
   
@@ -48,7 +76,7 @@ const CodeEditor = () => {
           <button className="btn btn-primary" onClick={saveQuestion}>Save</button>
         </div>
         <div className="question-editor">
-          <Question addTitle={addTitle} addDescription={addDescription} addTags={addTags} />
+          <Question addTitle={addTitle} addDescription={addDescription} selectedTags={tags} addTags={addTags} title={title} description={description} tags={allTags} />
         </div>
         <div className="d-flex justify-content-between">
           <div className="code-editor">

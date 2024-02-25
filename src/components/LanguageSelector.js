@@ -10,7 +10,7 @@ const LanguageSelector = ({ language, onSelect }) => {
         Language:
       </div>
       <div className="">
-        <select className="language-btn" onChange={(e)=>onSelect(e.target.value)} >
+        <select value={language} className="language-btn" onChange={(e)=>onSelect(e.target.value)} >
           {languages.map(([lang, version]) => (
             <option value={lang} key={lang}>
               {lang}&nbsp;<div>({version})</div>

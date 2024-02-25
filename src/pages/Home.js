@@ -4,49 +4,55 @@ import { useNavigate } from "react-router-dom";
 import CodeEditor from "../components/CodeEditor";
 import DropdownButton from "../components/DropdownButton";
 import Accordion from '../components/Home/Accordion';
+import { getAllQuestions } from "../services/services";
 
 import '../styles/editor.scss';
 
-const items = [
-  {
-    title: 'Arrays',
-    questions:[
-      {solved: true ,title: 'Two Sum', difficulty:'Easy'},
-      {solved: true ,title: 'Group Anagrams', difficulty:'Medium'},
-      {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-    ],
-  },
-  {
-    title: 'Two Pointers',
-    questions:[
-      {solved: true ,title: 'Two Sum', difficulty:'Easy'},
-      {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-    ],
-  },
-  {
-    title: 'Stack',
-    questions:[
-      {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-    ],
-  },
-];
+// const items = [
+//   {
+//     title: 'Array',
+//     questions:[
+//       {solved: true ,title: 'Two Sum', difficulty:'Easy'},
+//       {solved: true ,title: 'Group Anagrams', difficulty:'Medium'},
+//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
+//     ],
+//   },
+//   {
+//     title: 'Two Pointer',
+//     questions:[
+//       {solved: true ,title: 'Two Sum', difficulty:'Easy'},
+//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
+//     ],
+//   },
+//   {
+//     title: 'Stack',
+//     questions:[
+//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
+//     ],
+//   },
+// ];
 
 function Home () {
     const navigate = useNavigate();
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [solvedQuestions, setSolvedQuestions] = useState(0);
+    const [items, setItems] = useState([])
 
     useEffect(() => {
       let count = 0
       let solved = 0
-      items.map(category=>{
-        count+=category.questions.length
-        if(category.questions){
-          category.questions.map(q=>q.solved? solved+=1:'')
-        }
+      getAllQuestions().then(res=>{
+        setItems(res)
+        res.map(category=>{
+          count+=category.questions.length
+          if(category.questions){
+            category.questions.map(q=>q.solved? solved+=1:'')
+          }
+        })
+        setTotalQuestions(count)
+        setSolvedQuestions(solved)
       })
-      setTotalQuestions(count)
-      setSolvedQuestions(solved)
+
     },[])
 
     function openEditor() {
