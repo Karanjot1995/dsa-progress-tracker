@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const Question = ({ addTitle, addDescription, selectedTags, addTags, title , description, tags }) => {
+const Question = ({ addTitle, addDescription, selectedTags, addTags, title , description, difficulty, selectDifficulty, tags }) => {
   // const [title, setTitle] = useState(title)
   // const [description, setDescription] = useState(description)
   // const [selTags, setSelTags] = useState(selectedTags)
@@ -26,15 +26,30 @@ const Question = ({ addTitle, addDescription, selectedTags, addTags, title , des
     addDescription(e.target.value)
   }
 
+  const handleDifficultyChange = (e) => {
+    selectDifficulty(e.target.value)
+  }
+
   return (
     <div className="question mb-3">
       <div className="">
         <div className="title mb-2">Question:</div>
       </div>
       <div className="d-block border p-2">
-        <div className="mb-1">
-          <label className="me-3 d-block">Title: </label> 
-          <input value={title} onChange={handleTitleChange} className="w-100 form-control" type="text"/>
+        <div className="mb-1 d-md-flex justify-content-between">
+          <div className="col-md-9">
+            <label className="me-3 d-block">Title: </label> 
+            <input value={title} onChange={handleTitleChange} className="w-100 form-control" type="text"/>
+          </div>
+          <div className="col-md-2">
+            <label className="me-3 d-block">Difficulty: </label> 
+            <select value={difficulty} onChange={handleDifficultyChange} className="w-100 form-control" type="text">
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+              <option value="Very Hard">Very Hard</option>
+            </select>
+          </div>
         </div>
         <div className="mb-2">
           <label>Description: </label> 

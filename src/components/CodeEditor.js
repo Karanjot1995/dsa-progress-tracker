@@ -22,7 +22,7 @@ const CodeEditor = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [solved, setSolved] = useState(0);
-  const [difficulty, setDifficulty] = useState('Medium');
+  const [difficulty, setDifficulty] = useState('Easy');
   const [tags, setTags] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const queryParameters = new URLSearchParams(window.location.search)
@@ -42,6 +42,7 @@ const CodeEditor = () => {
           setValue(res.code)
           setLanguage(res.language)
           setTags(res.tags)
+          setDifficulty(res.difficulty)
         }
       })
     }
@@ -65,6 +66,10 @@ const CodeEditor = () => {
   }
   const addTags = (val) => {
     setTags(val)
+  }
+  const selectDifficulty = (val) => {
+    console.log(val)
+    setDifficulty(val)
   }
 
   const saveQuestion = () => {
@@ -96,7 +101,10 @@ const CodeEditor = () => {
           <ToastContainer />
         </div>
         <div className="question-editor">
-          <Question addTitle={addTitle} addDescription={addDescription} selectedTags={tags} addTags={addTags} title={title} description={description} tags={allTags} />
+          <Question 
+            title={title} description={description} tags={allTags} difficulty={difficulty}
+            addTitle={addTitle} addDescription={addDescription} selectedTags={tags} addTags={addTags} selectDifficulty={selectDifficulty}
+          />
         </div>
         <div className="d-flex justify-content-between">
           <div className="code-editor">

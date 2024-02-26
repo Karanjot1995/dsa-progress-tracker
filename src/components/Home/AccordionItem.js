@@ -47,16 +47,16 @@ const AccordionItem = ({ title, questions }) => {
         <div className="accordion-content">
           <table>
             <tr>
-              <th>Solved</th>
+              <th style={{'width':'20px'}}>Solved</th>
               <th>Problem</th>
-              <th>Difficulty</th>
+              <th style={{'width':'120px'}}>Difficulty</th>
             </tr>
             {questions.map(q=>
               <tr>
-                <td><input defaultChecked={q.solved} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
+                <td className='text-center'><input defaultChecked={q.solved} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
-                <td>{q.difficulty}</td>
+                <td className=''>{q.difficulty}</td>
               </tr>
             )}
           </table>
