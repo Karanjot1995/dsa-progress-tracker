@@ -68,7 +68,6 @@ const CodeEditor = () => {
     setTags(val)
   }
   const selectDifficulty = (val) => {
-    console.log(val)
     setDifficulty(val)
   }
 
