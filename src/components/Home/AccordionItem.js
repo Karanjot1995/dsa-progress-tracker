@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProgressBar from '../Common/ProgressBar';
 import { useNavigate } from "react-router-dom";
-import { updateSolved } from '../../services/services';
+import { deleteFile, updateSolved } from '../../services/services';
+import { FaRegTrashAlt } from "react-icons/fa";
+import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AccordionItem = ({ title, questions }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,8 +33,37 @@ const AccordionItem = ({ title, questions }) => {
     }
   };
 
+  const deleteQuestion = (q) => {
+    confirmAlert({
+      title: 'Confirm to submit',
+      message: `Are you sure you want to delete the file ${q.title}?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            deleteFile({id:q._id}).then(res=>{
+              if(!res.error){
+                toast.success("Deleted successfully");
+              }else{
+                toast.error("Something went wrong!");
+              }
+              setTimeout(() => {
+                window.location.reload(false);
+              }, "1500");              
+            })
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => alert('Click No')
+        }
+      ]
+    });
+  }
+
   return (
     <div className={`accordion-item ${isOpen ? 'open' : ''}`}>
+      <ToastContainer />
       <div className="accordion-title" onClick={toggleAccordion}>
         <div className='d-md-flex justify-content-between'>
           {title}
@@ -49,6 +81,7 @@ const AccordionItem = ({ title, questions }) => {
               <th style={{'width':'20px'}}>Solved</th>
               <th>Problem</th>
               <th style={{'width':'120px'}}>Difficulty</th>
+              <th ></th>
             </tr>
             {questions.map(q=>
               <tr>
@@ -56,6 +89,7 @@ const AccordionItem = ({ title, questions }) => {
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
                 <td className={`difficulty-${q.difficulty}`}>{q.difficulty}</td>
+                <td className="text-center delete-btn"><a onClick={()=>deleteQuestion(q)}><FaRegTrashAlt className='fs-20' height={30} fill="#ff0000"/></a></td>
               </tr>
             )}
           </table>

@@ -64,6 +64,13 @@ export const updateSolved = async (data) => {
   }).then(res => res.json())
 }
 
+export const deleteFile = async (data) => {
+  return await fetch(`${API_URL}/api/delete`, {
+    ...deleteOptons,
+    body: JSON.stringify(data)
+  }).then(res => res.json())
+}
+
 
 // export const register = async (data) => {
 //   return await fetch(`${API_URL}/users/register`, {

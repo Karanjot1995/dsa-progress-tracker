@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import { CODE_SNIPPETS } from "../constants";
@@ -17,6 +18,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CodeEditor = () => {
   const editorRef = useRef();
+  const navigate = useNavigate();
   const [value, setValue] = useState("");
   const [language, setLanguage] = useState("python");
   const [title, setTitle] = useState("");
@@ -82,8 +84,11 @@ const CodeEditor = () => {
       toast.warn("Select at least one Tag!");
     }else{
       createQuestion(data).then(res=>{
-        if(res){
+        if(!res.error){
           toast.success("Saved successfully");
+          setTimeout(() => {
+            navigate(`/editor?id=${res._id}`)
+          }, "1500"); 
         }else{
           toast.error("Something went wrong!");
         }
