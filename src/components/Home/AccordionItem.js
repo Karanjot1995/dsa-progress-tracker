@@ -81,7 +81,7 @@ const AccordionItem = ({ title, questions }) => {
               <th style={{'width':'20px'}}>Solved</th>
               <th>Problem</th>
               <th style={{'width':'120px'}}>Difficulty</th>
-              <th ></th>
+              <th style={{'max-width':'40px'}}></th>
             </tr>
             {questions.map(q=>
               <tr>
