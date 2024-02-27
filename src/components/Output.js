@@ -38,7 +38,7 @@ const Output = ({ editorRef, language }) => {
         </button>
       </div>
 
-      <div className="box">
+      <div className="box d-block">
         {output
           ? output.map((line, i) => <div key={i}>{line}</div>)
           : 'Click "Run Code" to see the output here'}

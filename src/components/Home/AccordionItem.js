@@ -29,7 +29,6 @@ const AccordionItem = ({ title, questions }) => {
       setSolved(solved-1)
     }
   };
-  
 
   return (
     <div className={`accordion-item ${isOpen ? 'open' : ''}`}>
@@ -56,7 +55,7 @@ const AccordionItem = ({ title, questions }) => {
                 <td className='text-center'><input defaultChecked={q.solved} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
-                <td className=''>{q.difficulty}</td>
+                <td className={`difficulty-${q.difficulty}`}>{q.difficulty}</td>
               </tr>
             )}
           </table>

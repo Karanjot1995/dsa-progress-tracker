@@ -3,16 +3,36 @@
   margin: auto;
 }
 
+table{
+  background: #36549a;
+  color: #fff;
+}
+
 .accordion {
   margin: auto;
+  .difficulty-Easy{
+    color: #59db59;
+    font-weight: bold;
+  }
+  .difficulty-Medium{
+    color: orange;
+    font-weight: bold;
+  }
+  .difficulty-Hard{
+    color: red;
+    font-weight: bold;
+  }
+  
+  
   .accordion-item {
     border-bottom: 1px solid #ccc;
-
-    &.open {
-      .accordion-title {
-        background-color:#7ea0eb;
-      }
-    }
+    border-radius: 5px;
+    background: #0d1b48;
+    // &.open {
+    //   .accordion-title {
+    //     background-color:#7ea0eb;
+    //   }
+    // }
     .pg-text{
       margin-right: 10px;
     }
@@ -20,8 +40,9 @@
     .accordion-title {
       padding: 10px;
       cursor: pointer;
-      background-color: #fff;
+      color: #fff;
     }
+    
 
     .accordion-content {
       background-color: #f4f4f4;

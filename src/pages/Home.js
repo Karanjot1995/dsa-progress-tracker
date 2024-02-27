@@ -62,7 +62,7 @@ function Home () {
     return (
       <div className="home">
         <div className="new-problem mb-2 d-flex justify-content-between align-items-center">
-          <div className="text-light">Progress: {solvedQuestions}/{totalQuestions} solved</div>
+          <div className="text-light">Progress: {solvedQuestions} / {totalQuestions} solved</div>
           <div className="">
             <button onClick={openEditor} className="btn btn-danger">New Problem</button>
           </div>   
