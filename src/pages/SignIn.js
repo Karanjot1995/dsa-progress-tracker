@@ -7,24 +7,17 @@ const SignIn = (props) => {
   // let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState ("");
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
-    // Sign up request
-    // register({ email: "exampleuser", password: "password123" }).then(res=>console.log(res))
-    // Sign in request
-    // login({ email: "exampleuser", password: "password123" }).then(res=>{
-    //   if(res.token){
-    //     localStorage.setItem("token", res.token)
-    //   }else{
-    //     console.log(res.message)
-    //   }
-    // })
-    // test()
+
   }, []);
 
   const handleSignIn = (e) => {
     e.preventDefault()
+    setIsLoading(true)
     login({ email: email, password: password }).then(res=>{
       if(res.token){
+        setIsLoading(false)
         console.log(res)
         localStorage.setItem("token", res.token)
         window.history.go();
@@ -55,7 +48,7 @@ const SignIn = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" onClick={handleSignIn}>Sign In</button>
+          <button disabled={isLoading} type="submit" onClick={handleSignIn}>{isLoading?'Signing in...':'Sign In'}</button>
         </form>
         <div>New here? <a className=" " target="_self" href="/sign-up">Sign up now</a></div>
       </div>

@@ -10,7 +10,6 @@ import SignUp from './pages/SignUp';
 
 function App() {
   const [isLogged, setIsLogged] = useState(localStorage.getItem('token'))
-  // console.log(isLogged)
   // const isLogged = localStorage.getItem('token')
 	return (
     <div className='App'>

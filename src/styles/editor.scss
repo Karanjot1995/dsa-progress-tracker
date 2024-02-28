@@ -143,3 +143,11 @@
 //     height:25vh;
 //   }
 // }
+
+
+@media only screen and (max-width: 756px){
+  
+  .code-editor, .output{
+    width:100%
+  }
+}

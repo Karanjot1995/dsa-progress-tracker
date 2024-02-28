@@ -110,7 +110,7 @@ const CodeEditor = () => {
             addTitle={addTitle} addDescription={addDescription} selectedTags={tags} addTags={addTags} selectDifficulty={selectDifficulty}
           />
         </div>
-        <div className="d-flex justify-content-between">
+        <div className="d-md-flex justify-content-between">
           <div className="code-editor">
             {/* <DropdownButton language={language} onSelect={onSelect} /> */}
             <LanguageSelector language={language} onSelect={onSelect} />

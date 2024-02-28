@@ -36,6 +36,7 @@ function Home () {
     const navigate = useNavigate();
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [solvedQuestions, setSolvedQuestions] = useState(0);
+    const [isLogged, setIsLogged] = useState(localStorage.getItem('token'))
     const [items, setItems] = useState([])
 
     useEffect(() => {
