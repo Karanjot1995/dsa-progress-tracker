@@ -16,10 +16,11 @@ const SignUp = () => {
         setTimeout(() => {
           navigate('/sign-in')
         }, "1500"); 
+      }else{
+        alert(res.message)
       }
       console.log(res)
     })
-    console.log('Signing up with:', email, password);
   };
 
   return (

@@ -27,7 +27,7 @@ const TopNavigation = () => {
           </li>
           {isLogged?
             <li className="logout-btn">
-              <button className="btn btn-danger" onClick={logout}>Logout</button>
+              <button className="btn btn-sm btn-danger" onClick={logout}>Logout</button>
             </li>
           :''}
           
