@@ -23,7 +23,8 @@ const SignIn = (props) => {
         window.history.go();
         // props.history.push("/home");
       }else{
-        console.log(res.message)
+        alert('email/password incorrect')
+        setIsLoading(false)
       }
     })
   }
