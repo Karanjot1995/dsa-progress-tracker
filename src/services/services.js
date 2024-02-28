@@ -1,5 +1,5 @@
-const API_URL = 'http://localhost:8000';
-// const API_URL = 'https://dsa-prep-server.onrender.com'
+// const API_URL = 'http://localhost:8000';
+const API_URL = 'https://dsa-prep-server.onrender.com'
 
 let postOptions = {
   method: "POST",
@@ -27,6 +27,7 @@ let putOptions = {
 
 let deleteOptons = {
   method: "DELETE",
+  mode: "cors",
   headers: {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${localStorage.getItem("token")}`,
