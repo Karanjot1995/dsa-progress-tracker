@@ -33,7 +33,7 @@ const SignIn = (props) => {
     <div>
       <div className="sign-in">
         <h2>Sign In</h2>
-        <form>
+        <form className="mb-3">
           <input
             type="email"
             placeholder="Email"
@@ -50,7 +50,7 @@ const SignIn = (props) => {
           />
           <button disabled={isLoading} type="submit" onClick={handleSignIn}>{isLoading?'Signing in...':'Sign In'}</button>
         </form>
-        <div>New here? <a className=" " target="_self" href="/sign-up">Sign up now</a></div>
+        <div className="text-light">New here? <a className=" " target="_self" href="/sign-up">Sign up now</a></div>
       </div>
     </div>
     

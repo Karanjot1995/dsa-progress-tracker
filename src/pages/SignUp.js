@@ -27,7 +27,7 @@ const SignUp = () => {
       <div className="sign-up">
         <ToastContainer/>
         <h2>Sign Up</h2>
-        <form >
+        <form className='mb-3'>
           <input
             type="email"
             placeholder="Email"
@@ -44,7 +44,7 @@ const SignUp = () => {
           />
           <button onClick={handleSignUp} type="submit">Sign Up</button>
         </form>
-        <div>Already have an account? <a className=" " target="_self" href="/sign-in">Sign In</a></div>
+        <div className="text-light">Already have an account? <a className=" " target="_self" href="/sign-in">Sign In</a></div>
       </div>
     </div>
   );
