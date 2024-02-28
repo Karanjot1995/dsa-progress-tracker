@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
+import { register } from '../services/services';
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = () => {
-    // Implement sign-up functionality here
+  const handleSignUp = (e) => {
+    e.preventDefault()
+    register({ email: email, password: password }).then(res=>{
+      if(res.user){
+        toast.success("Signed Up Successfuly!");
+        setTimeout(() => {
+          navigate('/sign-in')
+        }, "1500"); 
+      }
+      console.log(res)
+    })
     console.log('Signing up with:', email, password);
   };
 
   return (
     <div>
       <div className="sign-up">
+        <ToastContainer/>
         <h2>Sign Up</h2>
-        <form onSubmit={handleSignUp}>
+        <form >
           <input
             type="email"
             placeholder="Email"
@@ -28,7 +42,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Sign Up</button>
+          <button onClick={handleSignUp} type="submit">Sign Up</button>
         </form>
         <div>Already have an account? <a className=" " target="_self" href="/sign-in">Sign In</a></div>
       </div>
