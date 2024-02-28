@@ -6,6 +6,7 @@ let postOptions = {
   mode: "cors",
   headers: {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
   },
 };
 
@@ -13,6 +14,7 @@ let getOptions = {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
   },
 };
 
@@ -27,6 +29,7 @@ let deleteOptons = {
   method: "DELETE",
   headers: {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
   },
 };
 
@@ -38,15 +41,21 @@ let options = {
 };
 
 export const getAllQuestions = async () => {
-  return await fetch(`${API_URL}/api/all`).then((res) => res.json());
+  return await fetch(`${API_URL}/api/all`, {
+    ...getOptions,
+  }).then((res) => res.json());
 };
 
 export const getTags = async () => {
-  return await fetch(`${API_URL}/api/tags`).then((res) => res.json());
+  return await fetch(`${API_URL}/api/tags`, {
+    ...getOptions,
+  }).then((res) => res.json());
 };
 
 export const getQuestion = async (id) => {
-  return await fetch(`${API_URL}/api/question/${id}`).then((res) => res.json());
+  return await fetch(`${API_URL}/api/question/${id}`, {
+    ...getOptions,
+  }).then((res) => res.json());
 };
 
 
@@ -72,20 +81,29 @@ export const deleteFile = async (data) => {
 }
 
 
-// export const register = async (data) => {
-//   return await fetch(`${API_URL}/users/register`, {
-//     ...postOptions,
-//     body: JSON.stringify(data)
-//   }).then(res => res.json())
-// }
+export const register = async (data) => {
+  return await fetch(`${API_URL}/api/users/sign-up`, {
+    ...postOptions,
+    body: JSON.stringify(data)
+  }).then(res => res.json())
+}
 
-// export const login = async (data) => {
-//   return await fetch(`${API_URL}/users/login`, {
-//     ...postOptions,
-//     body: JSON.stringify(data)
-//   }).then(res => res.json())
-// }
+export const login = async (data) => {
+  return await fetch(`${API_URL}/api/users/sign-in`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },    
+    body: JSON.stringify(data)
+  }).then(res => res.json())
+}
 
+export const test = async (data) => {
+  return await fetch(`${API_URL}/api/users/test`, {
+    ...getOptions,
+  }).then(res => res.json())
+}
 
 // export const removeFromList = async (data) => {
 //   return await fetch(`${API_URL}/api/remove-from-list`, {
