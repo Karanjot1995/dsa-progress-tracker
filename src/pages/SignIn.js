@@ -8,9 +8,9 @@ const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState ("");
   const [isLoading, setIsLoading] = useState(false)
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, []);
+  // }, []);
 
   const handleSignIn = (e) => {
     e.preventDefault()
@@ -18,7 +18,6 @@ const SignIn = (props) => {
     login({ email: email, password: password }).then(res=>{
       if(res.token){
         setIsLoading(false)
-        console.log(res)
         localStorage.setItem("token", res.token)
         window.history.go();
         // props.history.push("/home");

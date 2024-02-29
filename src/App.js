@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.scss';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
@@ -7,9 +7,24 @@ import Editor from './pages/Editor';
 import TopNavigation from './components/Common/TopNavigation';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import { getAllQuestions } from './services/services';
 
 function App() {
   const [isLogged, setIsLogged] = useState(localStorage.getItem('token'))
+  useEffect(() => {
+    // setIsLogged(localStorage.getItem('token'))
+    // getAllQuestions().then(res=>console.log(res))
+
+  },[])
+  // function requireAuth(nextState, replace, next) {
+  //   if (!isLogged) {
+  //     replace({
+  //       pathname: "/sign-in",
+  //       state: {nextPathname: nextState.location.pathname}
+  //     });
+  //   }
+  //   next();
+  // }
   // const isLogged = localStorage.getItem('token')
 	return (
     <div className='App'>
@@ -20,7 +35,7 @@ function App() {
           <>
             <Route path="*" element={<Navigate to ="/home"/>}/>
             <Route exact path="/home" element={<Home/>}/>
-            {/* <Route exact path="/" element={<Home/>}/> */}
+            {/* <Route onEnter={requireAuth} exact path="/" element={<Home/>}/> */}
             <Route exact path="/editor" element={<Editor/>}/>
             <Route path="/sign-in" element={<Navigate to ="/"/>}/>
             <Route path="/sign-up" element={<Navigate to ="/"/>}/>          
