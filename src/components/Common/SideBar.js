@@ -34,6 +34,7 @@ const SideBar = ({users}) => {
                 // <li onClick={()=>getUserQuestions(u._id)}>{u.email.substring(0,u.email.indexOf('@'))}</li>
                 <li>{u.email.substring(0,u.email.indexOf('@'))}</li>
               )}
+              <li>(Under Development)</li>
             </ul>
           </div>
         </div>
