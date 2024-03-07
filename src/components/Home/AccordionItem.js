@@ -55,7 +55,7 @@ const AccordionItem = ({ title, questions }) => {
         },
         {
           label: 'No',
-          onClick: () => alert('Click No')
+          onClick: () => ''
         }
       ]
     });
