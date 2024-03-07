@@ -43,7 +43,6 @@ let options = {
 };
 
 const checkTokenValidity = (res) => {
-  console.log(res)
   if(res.status==200){
     return res.json()
   }else if(res.status == 404 || res.status == 403){
@@ -58,10 +57,22 @@ export const getAllQuestions = async () => {
   }).then((res) => checkTokenValidity(res));
 };
 
+export const getMyQuestions = async () => {
+  return await fetch(`${API_URL}/api/my-questions`, {
+    ...getOptions,
+  }).then((res) => checkTokenValidity(res));
+};
+
+export const getUserQuestions = async (id) => {
+  return await fetch(`${API_URL}/api/questions/${id}`, {
+    ...getOptions,
+  }).then((res) => checkTokenValidity(res));
+};
+
 export const getTags = async () => {
   return await fetch(`${API_URL}/api/tags`, {
     ...getOptions,
-  }).then((res) => res.json());
+  }).then((res) => checkTokenValidity(res));
 };
 
 export const getQuestion = async (id) => {
@@ -111,6 +122,14 @@ export const login = async (data) => {
     body: JSON.stringify(data)
   }).then(res => res.json())
 }
+
+
+export const getAllUsers = async () => {
+  return await fetch(`${API_URL}/api/users/all`, {
+    ...getOptions,
+  }).then((res) => checkTokenValidity(res));
+};
+
 
 export const test = async (data) => {
   return await fetch(`${API_URL}/api/users/test`, {

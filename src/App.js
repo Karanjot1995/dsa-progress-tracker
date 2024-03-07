@@ -7,14 +7,14 @@ import Editor from './pages/Editor';
 import TopNavigation from './components/Common/TopNavigation';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import { getAllQuestions } from './services/services';
+import { getAllQuestions, getAllUsers } from './services/services';
 
 function App() {
   const [isLogged, setIsLogged] = useState(localStorage.getItem('token'))
   useEffect(() => {
+    // getAllUsers().then(res=>console.log(res))
     // setIsLogged(localStorage.getItem('token'))
     // getAllQuestions().then(res=>console.log(res))
-
   },[])
   // function requireAuth(nextState, replace, next) {
   //   if (!isLogged) {
@@ -35,6 +35,7 @@ function App() {
           <>
             <Route path="*" element={<Navigate to ="/home"/>}/>
             <Route exact path="/home" element={<Home/>}/>
+            <Route exact path="/users/:username" element={<Home/>}/>
             {/* <Route onEnter={requireAuth} exact path="/" element={<Home/>}/> */}
             <Route exact path="/editor" element={<Editor/>}/>
             <Route path="/sign-in" element={<Navigate to ="/"/>}/>
