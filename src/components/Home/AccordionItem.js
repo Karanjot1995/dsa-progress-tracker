@@ -81,7 +81,8 @@ const AccordionItem = ({ title, questions, me }) => {
               <th style={{'width':'20px'}}>Solved</th>
               <th>Problem</th>
               <th style={{'width':'120px'}}>Difficulty</th>
-              <th style={{'width':'50px'}}></th>
+              {me? <th style={{'width':'50px'}}></th>:''}
+              
             </tr>
             {questions.map(q=>
               <tr>
@@ -89,7 +90,7 @@ const AccordionItem = ({ title, questions, me }) => {
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
                 <td className={`difficulty-${q.difficulty}`}>{q.difficulty}</td>
-                <td className="text-center delete-btn"><a onClick={()=>deleteQuestion(q)}><FaRegTrashAlt className='fs-20' height={30} fill="#ff0000"/></a></td>
+                {me?<td className="text-center delete-btn"><a onClick={()=>deleteQuestion(q)}><FaRegTrashAlt className='fs-20' height={30} fill="#ff0000"/></a></td>:''}
               </tr>
             )}
           </table>
