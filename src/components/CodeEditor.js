@@ -29,6 +29,8 @@ const CodeEditor = () => {
   const [allTags, setAllTags] = useState([]);
   const queryParameters = new URLSearchParams(window.location.search)
   const edit_id = queryParameters.get("id")
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+  const [otherUserQuestion, setOtherUserQuestion] = useState(false)
 
   useEffect(() => {
     getTags().then(res=>{
@@ -39,6 +41,9 @@ const CodeEditor = () => {
     if(edit_id){
       getQuestion(edit_id).then(res=>{
         if(res){
+          if(res.uid!=user.id){
+            setOtherUserQuestion(true)
+          }
           setTitle(res.title)
           setDescription(res.description)
           setValue(res.code)
@@ -96,16 +101,42 @@ const CodeEditor = () => {
     }
   }
 
+  const importQuestion = () => {
+    let data = {code: value, version:'', solved, difficulty, language, title, description, tags}
+    if(!title){
+      toast.warn("Title is a mandatory field!");
+    }else if(!tags.length){
+      toast.warn("Select at least one Tag!");
+    }else{
+      createQuestion(data).then(res=>{
+        if(!res.error){
+          toast.success("Saved successfully");
+          setTimeout(() => {
+            navigate(`/editor?id=${res._id}`)
+          }, "1500"); 
+        }else{
+          toast.error("Something went wrong!");
+        }
+      })
+    }
+  }
+
   
   return (
     <div>
       <div className="">
         <div className="text-end">
-          <button className="btn btn-primary" onClick={saveQuestion}>Save</button>
+          {otherUserQuestion?
+              <button className="btn btn-primary" onClick={importQuestion}>Import</button>:
+              <button className="btn btn-primary" onClick={saveQuestion}>Save</button>
+          }
+          {/* <button className="btn btn-primary" onClick={saveQuestion}>Save</button> */}
+          
           <ToastContainer />
         </div>
         <div className="question-editor">
           <Question 
+            disabled={otherUserQuestion}
             title={title} description={description} tags={allTags} difficulty={difficulty}
             addTitle={addTitle} addDescription={addDescription} selectedTags={tags} addTags={addTags} selectDifficulty={selectDifficulty}
           />

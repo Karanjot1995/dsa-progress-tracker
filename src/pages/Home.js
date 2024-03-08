@@ -72,10 +72,7 @@ function Home () {
             }
           })
         })
-        
       }
-
-
     },[])
 
     function openEditor() {
@@ -84,7 +81,6 @@ function Home () {
     // const toggleSidebar = () => {
     //   setIsOpen(!isOpen);
     // };
-    console.log(usrData)
 
     return (
       <div className="home">
