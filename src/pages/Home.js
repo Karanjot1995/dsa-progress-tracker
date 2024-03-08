@@ -9,29 +9,6 @@ import { getAllQuestions, getAllUsers, getMyQuestions, getUserQuestions } from "
 
 import '../styles/editor.scss';
 
-// const items = [
-//   {
-//     title: 'Array',
-//     questions:[
-//       {solved: true ,title: 'Two Sum', difficulty:'Easy'},
-//       {solved: true ,title: 'Group Anagrams', difficulty:'Medium'},
-//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-//     ],
-//   },
-//   {
-//     title: 'Two Pointer',
-//     questions:[
-//       {solved: true ,title: 'Two Sum', difficulty:'Easy'},
-//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-//     ],
-//   },
-//   {
-//     title: 'Stack',
-//     questions:[
-//       {solved: false ,title: 'Valid Sudoku', difficulty:'Medium'},
-//     ],
-//   },
-// ];
 
 function Home () {
     const navigate = useNavigate();
@@ -42,13 +19,11 @@ function Home () {
     const [isOpen, setIsOpen] = useState(false)
     const [otherUsers, setOtherUsers] = useState([])
     const { pathname } = useLocation();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+    const [me, setMe] = useState(true)
+    const [usrData, setUsrData] = useState({})
     const pattern = 'users/:username'
 
-    
-
-
-    // const queryParameters = new URLSearchParams(window.location.search)
-    // const edit_id = queryParameters.get("id")
 
     useEffect(() => {
       let count = 0
@@ -57,8 +32,9 @@ function Home () {
         let path = pathname.split('/')
         let id = path[path.length-1]
         getUserQuestions(id).then(res=>{
-          setItems(res)
-          res.map(category=>{
+          let questions = res.questions
+          setItems(questions)
+          questions.map(category=>{
             count+=category.questions.length
             if(category.questions){
               category.questions.map(q=>q.solved? solved+=1:'')
@@ -66,15 +42,17 @@ function Home () {
           })
           setTotalQuestions(count)
           setSolvedQuestions(solved)
-
+          setUsrData(res.user[0])
+          setMe(false)
           getAllUsers().then(res=>{
             if(res){
-              setOtherUsers(res)
+              let usrs = res
+              usrs = usrs.filter(u=> {return u._id!=user.id})
+              setOtherUsers(usrs)
             }
           })
         })
       }else{
-
         getMyQuestions().then(res=>{
           setItems(res)
           res.map(category=>{
@@ -85,10 +63,12 @@ function Home () {
           })
           setTotalQuestions(count)
           setSolvedQuestions(solved)
-
+          setUsrData({})
           getAllUsers().then(res=>{
             if(res){
-              setOtherUsers(res)
+              let usrs = res
+              usrs = usrs.filter(u=> {return u._id!=user.id})
+              setOtherUsers(usrs)
             }
           })
         })
@@ -104,7 +84,8 @@ function Home () {
     // const toggleSidebar = () => {
     //   setIsOpen(!isOpen);
     // };
-    console.log(otherUsers)
+    console.log(usrData)
+
     return (
       <div className="home">
         <div>
@@ -114,8 +95,9 @@ function Home () {
               <button onClick={openEditor} className="btn btn-danger">New Problem</button>
             </div>   
           </div>
+          <div>{usrData? <h2 className="text-light mb-2">{usrData.email}</h2>:''}</div>
           <div>
-            <Accordion items={items} />
+            <Accordion items={items} me={me}/>
           </div>
         </div>
         <div>

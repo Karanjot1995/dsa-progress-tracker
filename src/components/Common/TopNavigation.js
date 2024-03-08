@@ -11,6 +11,7 @@ const TopNavigation = () => {
   const logout = (e) =>{
     e.preventDefault()
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     navigate(0);
     // window.location.reload()
   }

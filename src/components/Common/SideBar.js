@@ -31,8 +31,8 @@ const SideBar = ({users}) => {
             <div style={{'padding':'10px'}}>Other Users</div>
             <ul className="menu">
               {users.map(u=>
-                // <li onClick={()=>getUserQuestions(u._id)}>{u.email.substring(0,u.email.indexOf('@'))}</li>
-                <li>{u.email.substring(0,u.email.indexOf('@'))}</li>
+                <li onClick={()=>getUserQuestions(u._id)}>{u.email.substring(0,u.email.indexOf('@'))}</li>
+                // <li>{u.email.substring(0,u.email.indexOf('@'))}</li>
               )}
               <li>(Under Development)</li>
             </ul>

@@ -1,5 +1,5 @@
-// const API_URL = 'http://localhost:8000';
-const API_URL = 'https://dsa-prep-server.onrender.com'
+const API_URL = 'http://localhost:8000';
+// const API_URL = 'https://dsa-prep-server.onrender.com'
 
 let postOptions = {
   method: "POST",
@@ -47,6 +47,7 @@ const checkTokenValidity = (res) => {
     return res.json()
   }else if(res.status == 404 || res.status == 403){
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     window.location.pathname = 'sign-in'
   }
 }

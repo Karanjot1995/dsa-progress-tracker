@@ -19,8 +19,8 @@ const SignIn = (props) => {
       if(res.token){
         setIsLoading(false)
         localStorage.setItem("token", res.token)
+        localStorage.setItem("user", JSON.stringify(res.user))
         window.history.go();
-        // props.history.push("/home");
       }else{
         alert('email/password incorrect')
         setIsLoading(false)

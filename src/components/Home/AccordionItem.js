@@ -7,7 +7,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { confirmAlert } from 'react-confirm-alert';
 import { ToastContainer, toast } from 'react-toastify';
 
-const AccordionItem = ({ title, questions }) => {
+const AccordionItem = ({ title, questions, me }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [solved, setSolved] = useState(false);
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ const AccordionItem = ({ title, questions }) => {
             </tr>
             {questions.map(q=>
               <tr>
-                <td className='text-center'><input defaultChecked={q.solved} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
+                <td className='text-center'><input defaultChecked={q.solved} disabled={!me} onChange={(e)=>checkSolved(e,q._id)} type="checkbox" /></td>
                 <td><a onClick={ ()=>navigate(`/editor?id=${q._id}`)}>{q.title}</a></td>
                 {/* <td>{q.title}</td> */}
                 <td className={`difficulty-${q.difficulty}`}>{q.difficulty}</td>

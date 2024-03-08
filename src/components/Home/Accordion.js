@@ -3,11 +3,11 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import AccordionItem from './AccordionItem';
 
-const Accordion = ({ items }) => {
+const Accordion = ({ items, me }) => {
   return (
     <div className="accordion">
       {items.map((item, index) => (
-        <AccordionItem key={index} title={item.title} questions={item.questions} />
+        <AccordionItem me={me} key={index} title={item.title} questions={item.questions} />
       ))}
     </div>
   );
